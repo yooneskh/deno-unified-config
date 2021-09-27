@@ -6,7 +6,7 @@ Utility to streamline your deno app config management through cli, .env and json
 ## Usage
 deno-config accepts a config object as the source of truth and applies changes to it according to cli, env files or json files.
 
-```
+``` ts
 // config.ts
 
 import { augmentConfiguration } from '...';
@@ -33,7 +33,7 @@ deno-config changes (augments) this object according to options passed through c
 ### Cli
 You can augment your config object using cli by giving arguments like this: `--config-{keyPath}={value}`. You can nest key path by using `-` like this `--config-db-port=3000`. One example of using cli is this.
 
-```
+``` ts
 // if you run your app like this
 // deno run app.ts --config-port=3000 --config-db-host=127.0.0.1 --config-cors-allowed --config-cors-allowedHosts=khoshghadam.com --config-cors-allowedHosts=yooneskh.ir
 // your config file will be this
@@ -55,7 +55,7 @@ Note usage of arrays and booleans. If a property is array in your config object,
 
 ### JSON files
 You can specify JSON file path like this `--json-config={json file path}` and deno-config will merge it with the config object.
-```
+``` ts
 // ./config/sample-config.json
 {
   "port": 3000,
@@ -85,7 +85,7 @@ You can specify JSON file path like this `--json-config={json file path}` and de
 ### Env files
 You can specify env file path like `--env-config={env file path}` and deno-config will augment you config object with it. each line must have this format `{keyPath}={value}`. you can nest keyPath with `.` as in `db.host=localhost`
 
-```
+``` ts
 // ./.env
 port=3000
 
