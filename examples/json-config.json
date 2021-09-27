@@ -1,0 +1,14 @@
+{
+  "port": 5000,
+  "db": {
+    "host": "json-host"
+  },
+  "cors": {
+    "allowedOrigins": ["api.test"],
+    "config": {
+      "test": 123,
+      "allowed": true
+    }
+  },
+  "test": false
+}
