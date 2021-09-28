@@ -4,7 +4,7 @@ Utility to streamline your deno app config management through cli, .env and json
 ## Installation
 deno-config is hosted at [https://deno.land/x/deno_config](https://deno.land/x/deno_config) and can be imported like this. Check latest version in deno.land when you want to import.
 ``` ts
-import { augmentConfiguration } from 'https://deno.land/x/deno_config@0.1.1/mod.ts';
+import { augmentConfiguration } from 'https://deno.land/x/deno_config@v0.1.2/mod.ts';
 ```
 
 ## Usage
