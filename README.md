@@ -1,4 +1,4 @@
-# Deno Config
+# Deno Unified Config
 Utility to streamline your deno app config management through cli, .env and json files.
 
 ## Installation
@@ -88,6 +88,8 @@ You can specify JSON file path like this `--json-config={json file path}` and de
 
 ### Env files
 You can specify env file path like `--env-config={env file path}` and deno-config will augment you config object with it. each line must have this format `{keyPath}={value}`. you can nest keyPath with `.` as in `db.host=localhost`
+
+Note: If `.env` file is present in the current directory, deno-config will use it automatically without specifying it through cli.
 
 ``` ts
 // ./.env

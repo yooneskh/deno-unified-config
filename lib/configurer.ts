@@ -1,6 +1,5 @@
-import { deepMerge } from '../deps.ts';
 
-const JSON_ARGUMENT_PREFIX = '--json-config';
+
 const ENV_ARGUMENT_PREFIX = '--env-config';
 const CLI_ARGUMENT_PREFIX = '--config';
 
@@ -102,31 +101,6 @@ export function smartAugment(source: GObject, target: GObject) {
 }
 
 
-export function gatherJsonConfigs(): GObject {
-
-  const configFiles = (
-    Deno.args
-      .filter(it => it.startsWith(JSON_ARGUMENT_PREFIX))
-      .map(it => it.slice(JSON_ARGUMENT_PREFIX.length + 1))
-  );
-
-  const result: GObject = {};
-
-  for (const file of configFiles) {
-    try {
-      const fileContent = Deno.readTextFileSync(file);
-      const fileJSON = JSON.parse(fileContent);
-      deepMerge(result, fileJSON);
-    }
-    catch (error) {
-      throw new Error(`could not read config file ${file} :: ${error.message}`);
-    }
-  }
-
-  return result;
-
-}
-
 export function gatherEnvConfigs(): GObject {
 
   const envFiles = (
@@ -189,9 +163,6 @@ export function gatherCliConfigs(): GObject {
 
 export function augmentConfiguration(config: GObject) {
   if (typeof config !== 'object' || !config) throw new Error('config is not an object.');
-
-  const jsonConfig = gatherJsonConfigs();
-  smartAugment(config, jsonConfig);
 
   const envConfig = gatherEnvConfigs();
   smartAugment(config, envConfig);
