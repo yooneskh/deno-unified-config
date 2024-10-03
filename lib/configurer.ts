@@ -109,6 +109,8 @@ export function gatherEnvConfigs(): GObject {
       .map(it => it.slice(ENV_ARGUMENT_PREFIX.length + 1))
   );
 
+  envFiles.unshift('.env');
+
   const result: GObject = {};
 
   for (const filePath of envFiles) {
@@ -128,9 +130,10 @@ export function gatherEnvConfigs(): GObject {
 
     }
     catch (error) {
-      throw new Error(`could not parse env file ${filePath} :: ${error.message}`);
+      if (filePath !== '.env') {
+        throw new Error(`could not parse env file ${filePath} :: ${error.message}`);
+      }
     }
-
   }
 
   return result;
