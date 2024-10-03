@@ -161,13 +161,18 @@ export function gatherCliConfigs(): GObject {
 }
 
 
-export function augmentConfiguration(config: GObject) {
-  if (typeof config !== 'object' || !config) throw new Error('config is not an object.');
+export function augmentConfiguration<T extends GObject>(config: T): T {
+
+  if (typeof config !== 'object' || !config) {
+    throw new Error('config is not an object.');
+  }
 
   const envConfig = gatherEnvConfigs();
   smartAugment(config, envConfig);
 
   const cliConfig = gatherCliConfigs();
   smartAugment(config, cliConfig);
+
+  return config;
 
 }
